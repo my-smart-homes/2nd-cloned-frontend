@@ -282,11 +282,15 @@ const createHassioConfig = ({
 const createGalleryConfig = ({ isProdBuild, latestBuild }) =>
   createWebpackConfig(bundle.config.gallery({ isProdBuild, latestBuild }));
 
+const createLandingPageConfig = ({ isProdBuild, latestBuild }) =>
+  createWebpackConfig(bundle.config.landingPage({ isProdBuild, latestBuild }));
+
 module.exports = {
   createAppConfig,
   createDemoConfig,
   createCastConfig,
   createHassioConfig,
   createGalleryConfig,
+  createLandingPageConfig,
   createWebpackConfig,
 };

@@ -136,11 +136,15 @@ const createHassioConfig = ({ isProdBuild, latestBuild }) =>
 const createGalleryConfig = ({ isProdBuild, latestBuild }) =>
   createRollupConfig(bundle.config.gallery({ isProdBuild, latestBuild }));
 
+const createLandingPageConfig = ({ isProdBuild, latestBuild }) =>
+  createRollupConfig(bundle.config.landingPage({ isProdBuild, latestBuild }));
+
 module.exports = {
   createAppConfig,
   createDemoConfig,
   createCastConfig,
   createHassioConfig,
   createGalleryConfig,
+  createLandingPageConfig,
   createRollupConfig,
 };
