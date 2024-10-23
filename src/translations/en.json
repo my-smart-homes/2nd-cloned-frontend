@@ -362,6 +362,7 @@
       "help": "Help",
       "successfully_saved": "Successfully saved",
       "successfully_deleted": "Successfully deleted",
+      "deleting_failed": "Deleting failed",
       "error_required": "Required",
       "copied": "Copied",
       "copied_clipboard": "Copied to clipboard",
@@ -1708,15 +1709,6 @@
         "message_placeholder": "Enter a sentence to speak.",
         "play": "Play"
       },
-      "dialog-ip-detail": {
-        "ip_information": "[%key:ui::panel::config::network::ip_information%]",
-        "ipv4": "IPv4",
-        "ipv6": "IPv6",
-        "ip_address": "IP Address: {address}",
-        "gateway": "Gateway: {gateway}",
-        "method": "Method: {method}",
-        "nameservers": "Name Servers: {nameservers}"
-      },
       "update_backup": {
         "title": "Create backup?",
         "text": "This will create a backup before installing.",
@@ -2473,6 +2465,7 @@
           "failed_get_logs": "Failed to get {provider} logs, {error}",
           "no_issues_search": "No issues found for search term ''{term}''",
           "load_logs": "Load full logs",
+          "nr_of_lines": "Number of lines",
           "loading_log": "Loading full log…",
           "no_errors": "No errors have been reported",
           "no_issues": "There are no new issues!",
@@ -2491,7 +2484,10 @@
           "custom_integration": "custom integration",
           "error_from_custom_integration": "This error originated from a custom integration.",
           "show_full_logs": "Show full logs",
+          "select_number_of_lines": "Select number of lines to download",
+          "lines": "Lines",
           "download_full_log": "Download full log",
+          "scroll_down_button": "New logs - Click to scroll",
           "provider_not_found": "Log provider not found",
           "provider_not_available": "Logs for ''{provider}'' are not available on your system.",
           "detail": {
@@ -4966,7 +4962,21 @@
             "view_device": "View Device",
             "interview_started": "The device is being interviewed. This may take some time.",
             "interview_failed": "The device interview failed. Additional information may be available in the logs.",
-            "waiting_for_device": "Communicating with the device. Please wait."
+            "waiting_for_device": "Communicating with the device. Please wait.",
+            "adding_insecurely": "The device is being added insecurely",
+            "added_insecurely": "The device was added insecurely",
+            "added_insecurely_text": "There was an error during secure inclusion. You can try again by excluding the device and adding it again.",
+            "low_security_reason": {
+              "0": "Security bootstrapping was canceled by the user.",
+              "1": "The required security keys were not configured in the driver.",
+              "2": "No Security S2 user callbacks (or provisioning info) were provided to grant security classes and/or validate the DSK.",
+              "3": "An expected message was not received within the corresponding timeout.",
+              "4": "There was no possible match in encryption parameters between the controller and the node.",
+              "5": "Security bootstrapping was canceled by the included node.",
+              "6": "The PIN was incorrect, so the included node could not decode the key exchange commands.",
+              "7": "There was a mismatch in security keys between the controller and the node.",
+              "8": "Unknown error occurred."
+            }
           },
           "provisioned": {
             "dsk": "DSK",
@@ -5226,9 +5236,13 @@
             "static": "Static",
             "auto": "Automatic",
             "disabled": "Disabled",
-            "ip_netmask": "IP address/Netmask",
+            "ip": "IP address",
+            "netmask": "Netmask",
+            "add_address": "Add address",
             "gateway": "Gateway address",
-            "dns_servers": "DNS Servers",
+            "dns_server": "DNS Server",
+            "add_dns_server": "Add DNS Server",
+            "custom_dns": "Custom",
             "unsaved": "You have unsaved changes, these will get lost if you change tabs, do you want to continue?",
             "failed_to_change": "Failed to change network settings",
             "hostname": {
@@ -5593,10 +5607,10 @@
             "type_warning_sections": "You can not change your view to use the 'sections' view type because migration is not supported yet. Start from scratch with a new view if you want to experiment with the 'sections' view.",
             "type_warning_others": "You can not change your view to an other type because migration is not supported yet. Start from scratch with a new view if you want to use another view type.",
             "types": {
-              "masonry": "Masonry (default)",
+              "masonry": "Masonry",
               "sidebar": "Sidebar",
               "panel": "Panel (1 card)",
-              "sections": "Sections (experimental)"
+              "sections": "Sections"
             },
             "subview": "Subview",
             "max_columns": "Max number of sections wide",
@@ -7727,6 +7741,7 @@
         "auto": "Automatic",
         "disabled": "Disabled",
         "ip_netmask": "IP address/netmask",
+        "netmask": "Netmask",
         "gateway": "Gateway address",
         "dns_servers": "DNS servers",
         "unsaved": "You have unsaved changes, these will get lost if you change tabs, do you want to continue?",
@@ -7758,7 +7773,7 @@
       },
       "uninstall_addon": {
         "title": "Uninstall {name}?",
-        "text": "Its configuration will be permanently deleted.",
+        "remove_data": "Also permanently delete this addon's data",
         "uninstall": "Uninstall"
       },
       "hardware": {
