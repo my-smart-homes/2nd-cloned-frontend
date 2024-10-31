@@ -1,5 +1,5 @@
 diff --git a/.github/workflows/design_preview.yaml b/.github/workflows/design_preview.yaml
-index 96b6cf442..8800014a9 100644
+index 96b6cf442..13ffb3c0e 100644
 --- a/.github/workflows/design_preview.yaml
 +++ b/.github/workflows/design_preview.yaml
 @@ -18,7 +18,7 @@ jobs:
@@ -12,7 +12,7 @@ index 96b6cf442..8800014a9 100644
        - name: Check out files from GitHub
          uses: actions/checkout@v4.2.2
 diff --git a/.github/workflows/nightly.yaml b/.github/workflows/nightly.yaml
-index 408ad46a8..17f49bc54 100644
+index 7a4ee65b1..6b9081a8d 100644
 --- a/.github/workflows/nightly.yaml
 +++ b/.github/workflows/nightly.yaml
 @@ -36,10 +36,10 @@ jobs:
@@ -64,7 +64,7 @@ index 408ad46a8..17f49bc54 100644
 +      #     path: translations.tar.gz
 +      #     if-no-files-found: error
 diff --git a/.github/workflows/release.yaml b/.github/workflows/release.yaml
-index 5d547e802..033e8ce1e 100644
+index 2eaf2b6a2..9a5e5f316 100644
 --- a/.github/workflows/release.yaml
 +++ b/.github/workflows/release.yaml
 @@ -42,10 +42,10 @@ jobs:
@@ -106,11 +106,11 @@ index 5d547e802..033e8ce1e 100644
 +      #     wheels-key: ${{ secrets.WHEELS_KEY }}
 +      #     requirements: "requirements.txt"
 diff --git a/demo/src/configs/arsaboo/lovelace.ts b/demo/src/configs/arsaboo/lovelace.ts
-index e6195d20f..b0bfd7608 100644
+index 0c50123ac..c51fd5b24 100644
 --- a/demo/src/configs/arsaboo/lovelace.ts
 +++ b/demo/src/configs/arsaboo/lovelace.ts
 @@ -1,7 +1,7 @@
- import { DemoConfig } from "../types";
+ import type { DemoConfig } from "../types";
  
  export const demoLovelaceArsaboo: DemoConfig["lovelace"] = (localize) => ({
 -  title: "Home Assistant",
@@ -119,7 +119,7 @@ index e6195d20f..b0bfd7608 100644
      {
        icon: "hass:home-assistant",
 diff --git a/demo/src/configs/sections/entities.ts b/demo/src/configs/sections/entities.ts
-index b1b50f04e..a2f8d5007 100644
+index 87163776e..6a835c4b9 100644
 --- a/demo/src/configs/sections/entities.ts
 +++ b/demo/src/configs/sections/entities.ts
 @@ -538,12 +538,13 @@ export const demoEntitiesSections: DemoConfig["entities"] = (localize) =>
@@ -7695,31 +7695,18 @@ index bbe9a1561..f1c82f9a8 100644
 \ No newline at end of file
 +</svg>
 diff --git a/pyproject.toml b/pyproject.toml
-index ca8430e02..d5eed826c 100644
+index 01f228165..7d42dd0ae 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
-@@ -1,10 +1,10 @@
- [build-system]
--requires = ["setuptools~=75.1"]
-+requires = ["setuptools~=68.0", "wheel~=0.40.0"]
+@@ -3,7 +3,7 @@ requires = ["setuptools~=75.1"]
  build-backend = "setuptools.build_meta"
  
  [project]
 -name         = "home-assistant-frontend"
- version      = "20241010.0"
 +name         = "my-smart-homes-frontend"
+ version      = "20241030.0"
  license      = {text = "Apache-2.0"}
  description  = "The Home Assistant frontend"
- readme       = "README.md"
-@@ -14,7 +14,7 @@ authors      = [
- requires-python = ">=3.11.0"
- 
- [project.urls]
--"Homepage" = "https://github.com/home-assistant/frontend"
-+"Homepage" = "https://github.com/my-smart-homes/frontend-ha/"
- 
- [tool.setuptools]
- platforms = ["any"]
 diff --git a/script/core b/script/core
 index c9848c462..891c0302a 100755
 --- a/script/core
@@ -7734,10 +7721,10 @@ index c9848c462..891c0302a 100755
  
  while getopts "hr:s" opt; do
 diff --git a/src/components/ha-sidebar.ts b/src/components/ha-sidebar.ts
-index 750076b5f..e5bc3b155 100644
+index 1d1166050..90821147d 100644
 --- a/src/components/ha-sidebar.ts
 +++ b/src/components/ha-sidebar.ts
-@@ -382,7 +382,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
+@@ -374,7 +374,7 @@ class HaSidebar extends SubscribeMixin(LitElement) {
          ? html`<mwc-button outlined @click=${this._closeEditMode}>
              ${this.hass.localize("ui.sidebar.done")}
            </mwc-button>`
@@ -7747,7 +7734,7 @@ index 750076b5f..e5bc3b155 100644
    }
  
 diff --git a/src/data/blueprint.ts b/src/data/blueprint.ts
-index a0e9f2562..a555103fc 100644
+index 5b8c816c6..f2ceb8739 100644
 --- a/src/data/blueprint.ts
 +++ b/src/data/blueprint.ts
 @@ -93,7 +93,7 @@ export const getBlueprintSourceType = (
@@ -7827,10 +7814,10 @@ index 94efb29c0..1da544de1 100644
      </div>
      <home-assistant></home-assistant>
 diff --git a/src/panels/config/dashboard/ha-config-dashboard.ts b/src/panels/config/dashboard/ha-config-dashboard.ts
-index 859ef4fdc..d41940616 100644
+index 471bb9c09..bfcbd1afa 100644
 --- a/src/panels/config/dashboard/ha-config-dashboard.ts
 +++ b/src/panels/config/dashboard/ha-config-dashboard.ts
-@@ -140,6 +140,7 @@ class HaConfigDashboard extends SubscribeMixin(LitElement) {
+@@ -134,6 +134,7 @@ class HaConfigDashboard extends SubscribeMixin(LitElement) {
  
    private _pages = memoizeOne((cloudStatus, isCloudLoaded) => {
      const pages: PageNavigation[] = [];
@@ -7839,7 +7826,7 @@ index 859ef4fdc..d41940616 100644
        pages.push({
          component: "cloud",
 diff --git a/src/panels/config/ha-panel-config.ts b/src/panels/config/ha-panel-config.ts
-index 8bdfcd042..ee6adfe79 100644
+index 391f89418..a691a044c 100644
 --- a/src/panels/config/ha-panel-config.ts
 +++ b/src/panels/config/ha-panel-config.ts
 @@ -14,7 +14,6 @@ import {
@@ -7850,7 +7837,7 @@ index 8bdfcd042..ee6adfe79 100644
    mdiNetwork,
    mdiNfcVariant,
    mdiPalette,
-@@ -92,12 +91,12 @@ export const configSections: { [name: string]: PageNavigation[] } = {
+@@ -94,12 +93,12 @@ export const configSections: { [name: string]: PageNavigation[] } = {
        iconColor: "#B1345C",
        component: "lovelace",
      },
@@ -7869,7 +7856,7 @@ index 8bdfcd042..ee6adfe79 100644
      {
        path: "/config/tags",
        translationKey: "tags",
-@@ -215,14 +214,14 @@ export const configSections: { [name: string]: PageNavigation[] } = {
+@@ -217,14 +216,14 @@ export const configSections: { [name: string]: PageNavigation[] } = {
        iconColor: "#616161",
      },
    ],
@@ -7892,7 +7879,7 @@ index 8bdfcd042..ee6adfe79 100644
    // Not used as a tab, but this way it will stay in the quick bar
    energy: [
      {
-@@ -407,10 +406,10 @@ class HaPanelConfig extends SubscribeMixin(HassRouterPage) {
+@@ -409,10 +408,10 @@ class HaPanelConfig extends SubscribeMixin(HassRouterPage) {
          tag: "ha-config-areas",
          load: () => import("./areas/ha-config-areas"),
        },
@@ -7907,7 +7894,7 @@ index 8bdfcd042..ee6adfe79 100644
        automation: {
          tag: "ha-config-automation",
          load: () => import("./automation/ha-config-automation"),
-@@ -427,10 +426,10 @@ class HaPanelConfig extends SubscribeMixin(HassRouterPage) {
+@@ -429,10 +428,10 @@ class HaPanelConfig extends SubscribeMixin(HassRouterPage) {
          tag: "ha-config-tags",
          load: () => import("./tags/ha-config-tags"),
        },
@@ -7923,10 +7910,10 @@ index 8bdfcd042..ee6adfe79 100644
          tag: "ha-config-devices",
          load: () => import("./devices/ha-config-devices"),
 diff --git a/src/panels/config/info/ha-config-info.ts b/src/panels/config/info/ha-config-info.ts
-index c4c49f319..6445c1ad3 100644
+index 5deb9bd58..d31e31a60 100644
 --- a/src/panels/config/info/ha-config-info.ts
 +++ b/src/panels/config/info/ha-config-info.ts
-@@ -34,7 +34,7 @@ import { documentationUrl } from "../../../util/documentation-url";
+@@ -27,7 +27,7 @@ import { documentationUrl } from "../../../util/documentation-url";
  const JS_TYPE = __BUILD__;
  const JS_VERSION = __VERSION__;
  
@@ -7935,7 +7922,7 @@ index c4c49f319..6445c1ad3 100644
    {
      name: "change_log",
      path: "/latest-release-notes/",
-@@ -126,30 +126,34 @@ class HaConfigInfo extends LitElement {
+@@ -119,30 +119,34 @@ class HaConfigInfo extends LitElement {
                >
                </ha-logo-svg>
              </a>
@@ -7989,7 +7976,7 @@ index c4c49f319..6445c1ad3 100644
                <li>
                  <span class="version-label">
                    ${this.hass.localize(
-@@ -173,46 +177,23 @@ class HaConfigInfo extends LitElement {
+@@ -166,46 +170,23 @@ class HaConfigInfo extends LitElement {
              </a>
            </ha-card>
  
@@ -8053,7 +8040,7 @@ index c4c49f319..6445c1ad3 100644
          </div>
        </hass-subpage>
 diff --git a/src/translations/en.json b/src/translations/en.json
-index ce5d7ee5e..5231f0544 100644
+index 5c62be98d..a8597572c 100644
 --- a/src/translations/en.json
 +++ b/src/translations/en.json
 @@ -362,7 +362,6 @@
@@ -8112,8 +8099,8 @@ index ce5d7ee5e..5231f0544 100644
          "not_supported_microphone_documentation_link": "the documentation"
        },
        "generic": {
-@@ -1193,7 +1193,7 @@
-           "install": "Install",
+@@ -1194,7 +1194,7 @@
+           "update": "Update",
            "create_backup": "Create backup before updating",
            "auto_update_enabled_title": "Can not skip version",
 -          "auto_update_enabled_text": "Automatic updates for this item have been enabled; skipping it is, therefore, unavailable. You can either install this update now or wait for Home Assistant to do it automatically."
@@ -8121,7 +8108,7 @@ index ce5d7ee5e..5231f0544 100644
          },
          "updater": {
            "title": "Update instructions"
-@@ -1372,9 +1372,9 @@
+@@ -1373,9 +1373,9 @@
            "switch_as_x_confirm": "This switch will be hidden and a new {domain} will be added. Your existing configurations using the switch will continue to work.",
            "switch_as_x_remove_confirm": "This {domain} will be removed and the original switch will be visible again. Your existing configurations using the {domain} will no longer work!",
            "switch_as_x_change_confirm": "This {domain_1} will be removed and will be replaced by a new {domain_2}. Your existing configurations using the {domain_1} will no longer work!",
@@ -8134,7 +8121,7 @@ index ce5d7ee5e..5231f0544 100644
            "hidden_explanation": "Hidden entities will not be shown on your dashboard or included when indirectly referenced (ie via an area or device). Their history is still tracked and you can still interact with them with actions.",
            "delete": "Delete",
            "confirm_delete": "Are you sure you want to delete this entity?",
-@@ -1428,7 +1428,7 @@
+@@ -1429,7 +1429,7 @@
          "view_entity": "More info about entity"
        },
        "restart": {
@@ -8143,7 +8130,7 @@ index ce5d7ee5e..5231f0544 100644
          "advanced_options": "Advanced options",
          "reload": {
            "title": "Quick reload",
-@@ -1437,43 +1437,43 @@
+@@ -1438,43 +1438,43 @@
            "failed": "Failed to reload configuration"
          },
          "restart": {
@@ -8200,7 +8187,7 @@ index ce5d7ee5e..5231f0544 100644
          }
        },
        "aliases": {
-@@ -1533,7 +1533,7 @@
+@@ -1534,7 +1534,7 @@
            "minimum": "Minimum value",
            "maximum": "Maximum value",
            "initial": "Initial value",
@@ -8209,7 +8196,7 @@ index ce5d7ee5e..5231f0544 100644
            "step": "Step size"
          },
          "timer": {
-@@ -1585,8 +1585,8 @@
+@@ -1586,8 +1586,8 @@
          "enable_new_entities_label": "Enable newly added entities.",
          "enable_new_entities_description": "If newly discovered devices for {integration} should be automatically added.",
          "enable_polling_label": "Enable polling for updates.",
@@ -8220,7 +8207,7 @@ index ce5d7ee5e..5231f0544 100644
          "update": "Update"
        },
        "zha_reconfigure_device": {
-@@ -1635,8 +1635,7 @@
+@@ -1636,8 +1636,7 @@
            "zigbee_information": "View the Zigbee information for the device."
          },
          "confirmations": {
@@ -8230,7 +8217,7 @@ index ce5d7ee5e..5231f0544 100644
          },
          "quirk": "Quirk",
          "last_seen": "Last seen",
-@@ -1709,6 +1708,15 @@
+@@ -1710,6 +1709,15 @@
          "message_placeholder": "Enter a sentence to speak.",
          "play": "Play"
        },
@@ -8246,7 +8233,7 @@ index ce5d7ee5e..5231f0544 100644
        "update_backup": {
          "title": "Create backup?",
          "text": "This will create a backup before installing.",
-@@ -1731,7 +1739,7 @@
+@@ -1732,7 +1740,7 @@
          },
          "new": {
            "header": "[%key:ui::dialogs::matter-add-device::main::header%]",
@@ -8255,7 +8242,7 @@ index ce5d7ee5e..5231f0544 100644
            "download_app": "Install it from the Google Play Store or the App Store if you don't have it.",
            "playstore": "[%key:ui::panel::page-onboarding::welcome::playstore%]",
            "appstore": "[%key:ui::panel::page-onboarding::welcome::appstore%]"
-@@ -1750,8 +1758,8 @@
+@@ -1751,8 +1759,8 @@
            "step_3": "Tap {link_apps_services} and choose {home_assistant} from the list.",
            "linked_matter_apps_services": "Linked Matter apps and services",
            "link_apps_services": "Link apps & services",
@@ -8266,7 +8253,7 @@ index ce5d7ee5e..5231f0544 100644
          },
          "google_home_fallback": {
            "header": "Copy pairing code",
-@@ -1829,8 +1837,8 @@
+@@ -1830,8 +1838,8 @@
      "notification_toast": {
        "action_failed": "Failed to perform the action {service}.",
        "connection_lost": "Connection lost. Reconnecting…",
@@ -8277,7 +8264,7 @@ index ce5d7ee5e..5231f0544 100644
        "wrapping_up_startup": "Wrapping up startup, not everything will be available until it is finished.",
        "integration_starting": "Starting {integration}, not everything will be available until it is finished.",
        "triggered": "Triggered {name}",
-@@ -1846,14 +1854,14 @@
+@@ -1847,14 +1855,14 @@
      },
      "panel": {
        "my": {
@@ -8297,7 +8284,7 @@ index ce5d7ee5e..5231f0544 100644
          "error": "An unknown error occurred"
        },
        "config": {
-@@ -1864,7 +1872,7 @@
+@@ -1865,7 +1873,7 @@
              "actions": "Actions"
            }
          },
@@ -8306,7 +8293,7 @@ index ce5d7ee5e..5231f0544 100644
          "dashboard": {
            "devices": {
              "main": "Devices & services",
-@@ -1876,18 +1884,18 @@
+@@ -1877,18 +1885,18 @@
            },
            "backup": {
              "main": "Backup",
@@ -8328,7 +8315,7 @@ index ce5d7ee5e..5231f0544 100644
              "secondary": "Manage your voice assistants"
            },
            "energy": {
-@@ -1933,7 +1941,7 @@
+@@ -1937,7 +1945,7 @@
          },
          "updates": {
            "caption": "Updates",
@@ -8337,7 +8324,7 @@ index ce5d7ee5e..5231f0544 100644
            "no_updates": "No updates available",
            "no_update_entities": {
              "title": "Unable to check for updates",
-@@ -1955,16 +1963,16 @@
+@@ -1959,16 +1967,16 @@
          },
          "repairs": {
            "caption": "Repairs",
@@ -8357,7 +8344,7 @@ index ce5d7ee5e..5231f0544 100644
            "copy": "Copy",
            "reported_by": "Reported by {integration}",
            "created_at_by": "{date} by {integration}",
-@@ -2064,7 +2072,7 @@
+@@ -2068,7 +2076,7 @@
            },
            "picker": {
              "header": "Areas",
@@ -8366,7 +8353,7 @@ index ce5d7ee5e..5231f0544 100644
              "introduction2": "To place devices in an area, use the link below to navigate to the integrations page and then click on a configured integration to get to the device cards.",
              "integrations_page": "Integrations page",
              "no_areas": "Looks like you have no areas yet!",
-@@ -2103,7 +2111,7 @@
+@@ -2107,7 +2115,7 @@
          "backup": {
            "caption": "Backups",
            "description": "Last backup {relative_time}",
@@ -8375,7 +8362,7 @@ index ce5d7ee5e..5231f0544 100644
            "create_backup": "[%key:supervisor::backup::create_backup%]",
            "creating_backup": "Backup is currently being created",
            "download_backup": "[%key:supervisor::backup::download_backup%]",
-@@ -2170,7 +2178,7 @@
+@@ -2174,7 +2182,7 @@
            "delete_integration": "Are you sure you want to delete this integration? It will remove the entities it provides",
            "grid": {
              "title": "Electricity grid",
@@ -8384,7 +8371,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "More information on how to get started.",
              "grid_consumption": "Grid consumption",
              "edit_consumption": "Edit consumption",
-@@ -2189,7 +2197,7 @@
+@@ -2193,7 +2201,7 @@
                  "paragraph": "Grid consumption is the energy that flows from the energy grid to your home.",
                  "entity_para": "Pick a sensor which measures grid consumption in either of {unit}.",
                  "energy_stat": "Consumed energy",
@@ -8393,7 +8380,7 @@ index ce5d7ee5e..5231f0544 100644
                  "no_cost": "Do not track costs",
                  "cost_stat": "Use an entity tracking the total costs",
                  "cost_stat_input": "Entity with the total costs",
-@@ -2216,7 +2224,7 @@
+@@ -2220,7 +2228,7 @@
            },
            "solar": {
              "title": "Solar panels",
@@ -8402,7 +8389,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "More information on how to get started.",
              "solar_production": "Solar production",
              "edit_solar_production": "Edit solar production",
-@@ -2253,7 +2261,7 @@
+@@ -2257,7 +2265,7 @@
            },
            "gas": {
              "title": "Gas consumption",
@@ -8411,7 +8398,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "More information on how to get started.",
              "gas_consumption": "Gas consumption",
              "edit_gas_source": "Edit gas source",
-@@ -2264,7 +2272,7 @@
+@@ -2268,7 +2276,7 @@
                "paragraph": "Gas consumption is measured either as the volume of gas that flows to your home or as the amount of energy contained in the gas.",
                "entity_para": "Pick a sensor which measures gas consumption in either of {unit}.",
                "note_para": "Note: It is not possible to add both sensors measuring a volume of gas and sensors measuring the amount of energy contained in the gas.",
@@ -8420,7 +8407,7 @@ index ce5d7ee5e..5231f0544 100644
                "no_cost": "[%key:ui::panel::config::energy::grid::flow_dialog::from::no_cost%]",
                "cost_stat": "[%key:ui::panel::config::energy::grid::flow_dialog::from::cost_stat%]",
                "cost_stat_input": "[%key:ui::panel::config::energy::grid::flow_dialog::from::cost_stat_input%]",
-@@ -2277,7 +2285,7 @@
+@@ -2281,7 +2289,7 @@
            },
            "water": {
              "title": "Water consumption",
@@ -8429,7 +8416,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "More information on how to get started.",
              "water_consumption": "Water consumption",
              "edit_water_source": "Edit water source",
-@@ -2287,7 +2295,7 @@
+@@ -2291,7 +2299,7 @@
                "header": "Configure water consumption",
                "paragraph": "Water consumption is the volume of water that flows to your home.",
                "entity_para": "Pick a sensor which measures water consumption in either of {unit}.",
@@ -8438,7 +8425,7 @@ index ce5d7ee5e..5231f0544 100644
                "no_cost": "[%key:ui::panel::config::energy::grid::flow_dialog::from::no_cost%]",
                "cost_stat": "[%key:ui::panel::config::energy::grid::flow_dialog::from::cost_stat%]",
                "cost_stat_input": "[%key:ui::panel::config::energy::grid::flow_dialog::from::cost_stat_input%]",
-@@ -2300,7 +2308,7 @@
+@@ -2304,7 +2312,7 @@
            },
            "device_consumption": {
              "title": "Individual devices",
@@ -8447,7 +8434,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "More information on how to get started.",
              "add_stat": "Pick entity to track energy of",
              "selected_stat": "Tracking energy for",
-@@ -2386,18 +2394,18 @@
+@@ -2390,18 +2398,18 @@
            }
          },
          "url": {
@@ -8459,7 +8446,7 @@ index ce5d7ee5e..5231f0544 100644
            "external_url_label": "Internet",
 -          "external_use_ha_cloud": "Use Home Assistant Cloud",
 -          "manage_ha_cloud": "Manage Home Assistant Cloud",
-+          "external_use_ha_cloud": "Use MSH Cloud",
++          "external_use_ha_cloud": "Use R Cloud",
 +          "manage_ha_cloud": "Manage MSH Cloud",
            "external_get_ha_cloud": "Access from anywhere, add Google & Alexa easily",
 -          "ha_cloud_remote_not_enabled": "Your Home Assistant Cloud remote connection is currently not enabled.",
@@ -8467,12 +8454,12 @@ index ce5d7ee5e..5231f0544 100644
            "enable_remote": "[%key:ui::common::enable%]",
            "internal_url_automatic": "Automatic",
            "internal_url_https_error_title": "Invalid local network URL",
--          "internal_url_https_error_description": "You have configured an HTTPS certificate in Home Assistant. This means that your internal URL needs to be set to a domain covered by the certficate."
-+          "internal_url_https_error_description": "You have configured an HTTPS certificate in MSH. This means that your internal URL needs to be set to a domain covered by the certficate."
+-          "internal_url_https_error_description": "You have configured an HTTPS certificate in Home Assistant. This means that your internal URL needs to be set to a domain covered by the certficate.",
++          "internal_url_https_error_description": "You have configured an HTTPS certificate in MSH. This means that your internal URL needs to be set to a domain covered by the certficate.",
+           "internal_url_automatic_description": "Use the configured network settings",
+           "internal_url_placeholder": "http://<some IP address>:8123"
          },
-         "hardware": {
-           "caption": "Hardware",
-@@ -2429,7 +2437,7 @@
+@@ -2435,7 +2443,7 @@
            "copy_raw": "Raw text",
            "copy_github": "For GitHub",
            "description": "Version, loaded integrations and links to documentation",
@@ -8481,7 +8468,7 @@ index ce5d7ee5e..5231f0544 100644
            "developed_by": "Developed by a bunch of awesome people.",
            "license": "Published under the Apache 2.0 license",
            "source": "Source:",
-@@ -2465,7 +2473,6 @@
+@@ -2471,7 +2479,6 @@
            "failed_get_logs": "Failed to get {provider} logs, {error}",
            "no_issues_search": "No issues found for search term ''{term}''",
            "load_logs": "Load full logs",
@@ -8489,18 +8476,7 @@ index ce5d7ee5e..5231f0544 100644
            "loading_log": "Loading full log…",
            "no_errors": "No errors have been reported",
            "no_issues": "There are no new issues!",
-@@ -2484,10 +2491,7 @@
-           "custom_integration": "custom integration",
-           "error_from_custom_integration": "This error originated from a custom integration.",
-           "show_full_logs": "Show full logs",
--          "select_number_of_lines": "Select number of lines to download",
--          "lines": "Lines",
-           "download_full_log": "Download full log",
--          "scroll_down_button": "New logs - Click to scroll",
-           "provider_not_found": "Log provider not found",
-           "provider_not_available": "Logs for ''{provider}'' are not available on your system.",
-           "detail": {
-@@ -2524,7 +2528,7 @@
+@@ -2533,7 +2540,7 @@
                  },
                  "iframe": {
                    "title": "Webpage",
@@ -8509,7 +8485,7 @@ index ce5d7ee5e..5231f0544 100644
                  }
                }
              },
-@@ -2611,10 +2615,8 @@
+@@ -2620,10 +2627,8 @@
                "assist_devices": "{number} Assist {number, plural,\n  one {device}\n  other {devices}\n}",
                "delete": {
                  "confirm_title": "Delete {name}?",
@@ -8521,7 +8497,7 @@ index ce5d7ee5e..5231f0544 100644
                "devices": {
                  "title": "Assist devices",
                  "device": "Device",
-@@ -2674,7 +2676,7 @@
+@@ -2683,7 +2688,7 @@
                "features": {
                  "assistants": {
                    "title": "Google Assistant and Amazon Alexa",
@@ -8530,7 +8506,7 @@ index ce5d7ee5e..5231f0544 100644
                  },
                  "speech": {
                    "title": "Amazing speech options for Assist",
-@@ -2739,7 +2741,7 @@
+@@ -2748,7 +2753,7 @@
            "description": "Create custom behavior rules for your home",
            "picker": {
              "header": "Automation editor",
@@ -8539,7 +8515,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "Learn more about automations",
              "pick_automation": "Pick automation to edit",
              "no_automations": "We couldn't find any automations",
-@@ -2782,7 +2784,7 @@
+@@ -2791,7 +2796,7 @@
                "disable": "Disable"
              },
              "empty_header": "Start automating",
@@ -8548,7 +8524,7 @@ index ce5d7ee5e..5231f0544 100644
              "empty_text_2": "Automations connect triggers to actions in a ''when trigger then action'' fashion with optional conditions. For example: ''When the sun sets and if {user} is home, then turn on the lights''."
            },
            "dialog_new": {
-@@ -2795,7 +2797,7 @@
+@@ -2804,7 +2809,7 @@
                "author": "By {author}",
                "local": "By you",
                "community": "By the community",
@@ -8557,7 +8533,7 @@ index ce5d7ee5e..5231f0544 100644
              },
              "discover_blueprint_tip": "Discover more community blueprints"
            },
-@@ -2808,7 +2810,7 @@
+@@ -2817,7 +2822,7 @@
              "migrate": "Migrate",
              "duplicate": "[%key:ui::common::duplicate%]",
              "take_control": "Take control",
@@ -8566,7 +8542,7 @@ index ce5d7ee5e..5231f0544 100644
              "run": "[%key:ui::panel::config::automation::editor::actions::run%]",
              "rename": "[%key:ui::panel::config::automation::editor::triggers::rename%]",
              "show_trace": "Traces",
-@@ -2927,7 +2929,7 @@
+@@ -2937,7 +2942,7 @@
                    "context_user_picked": "User firing event",
                    "context_user_pick": "Select user",
                    "description": {
@@ -8575,7 +8551,7 @@ index ce5d7ee5e..5231f0544 100644
                      "full": "When {eventTypes} event is fired"
                    }
                  },
-@@ -2956,14 +2958,14 @@
+@@ -2966,14 +2971,14 @@
                    }
                  },
                  "homeassistant": {
@@ -8594,7 +8570,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "mqtt": {
-@@ -3051,9 +3053,6 @@
+@@ -3061,9 +3066,6 @@
                    "type_input": "Value of a date/time helper or timestamp-class sensor",
                    "label": "Time",
                    "at": "At time",
@@ -8604,7 +8580,7 @@ index ce5d7ee5e..5231f0544 100644
                    "mode": "Mode",
                    "description": {
                      "picker": "At a specific time, or on a specific date.",
-@@ -3081,7 +3080,7 @@
+@@ -3091,7 +3093,7 @@
                    "webhook_id_helper": "Treat this ID like a password: keep it secret and make it hard to guess.",
                    "webhook_settings": "Webhook settings",
                    "description": {
@@ -8613,7 +8589,7 @@ index ce5d7ee5e..5231f0544 100644
                      "full": "When a Webhook payload has been received"
                    }
                  },
-@@ -3155,8 +3154,8 @@
+@@ -3165,8 +3167,8 @@
                    "label": "And",
                    "description": {
                      "picker": "Test if multiple conditions are true.",
@@ -8624,7 +8600,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "device": {
-@@ -3170,9 +3169,9 @@
+@@ -3180,9 +3182,9 @@
                    "label": "Not",
                    "description": {
                      "picker": "Test if a condition is not true.",
@@ -8637,7 +8613,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "numeric_state": {
-@@ -3195,8 +3194,8 @@
+@@ -3205,8 +3207,8 @@
                    "label": "Or",
                    "description": {
                      "picker": "Test if any condition is true.",
@@ -8648,7 +8624,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "state": {
-@@ -3205,7 +3204,7 @@
+@@ -3215,7 +3217,7 @@
                    "description": {
                      "picker": "If an entity (or attribute) is in a specific state.",
                      "no_entity": "Confirm state",
@@ -8657,7 +8633,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "sun": {
-@@ -3218,7 +3217,7 @@
+@@ -3228,7 +3230,7 @@
                    "sunset": "Sunset",
                    "description": {
                      "picker": "If the sun is above or below the horizon.",
@@ -8666,7 +8642,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "template": {
-@@ -3226,7 +3225,7 @@
+@@ -3236,7 +3238,7 @@
                    "value_template": "[%key:ui::panel::config::automation::editor::triggers::type::template::value_template%]",
                    "description": {
                      "picker": "If a template evaluates to true.",
@@ -8675,7 +8651,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "time": {
-@@ -3249,7 +3248,7 @@
+@@ -3259,7 +3261,7 @@
                    },
                    "description": {
                      "picker": "If the current time is before or after a specified time.",
@@ -8684,7 +8660,7 @@ index ce5d7ee5e..5231f0544 100644
                    }
                  },
                  "trigger": {
-@@ -3283,7 +3282,7 @@
+@@ -3293,7 +3295,7 @@
                "invalid_action": "Invalid action",
                "run": "Run",
                "run_action_error": "Error running action",
@@ -8693,7 +8669,7 @@ index ce5d7ee5e..5231f0544 100644
                "duplicate": "[%key:ui::common::duplicate%]",
                "re_order": "[%key:ui::panel::config::automation::editor::triggers::re_order%]",
                "rename": "[%key:ui::panel::config::automation::editor::triggers::rename%]",
-@@ -3386,7 +3385,7 @@
+@@ -3396,7 +3398,7 @@
                    "event": "[%key:ui::panel::config::automation::editor::triggers::type::event::event_type%]",
                    "event_data": "[%key:ui::panel::config::automation::editor::triggers::type::event::event_data%]",
                    "description": {
@@ -8702,7 +8678,7 @@ index ce5d7ee5e..5231f0544 100644
                      "full": "Manually fire event {name}",
                      "template": "based on a template"
                    }
-@@ -3642,7 +3641,7 @@
+@@ -3652,7 +3654,7 @@
            "description": "Execute a sequence of actions",
            "picker": {
              "header": "Script Editor",
@@ -8711,7 +8687,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "Learn more about scripts",
              "no_scripts": "We couldn't find any scripts",
              "add_script": "Add script",
-@@ -3685,13 +3684,16 @@
+@@ -3695,13 +3697,16 @@
            "editor": {
              "alias": "Name",
              "icon": "Icon",
@@ -8729,7 +8705,7 @@ index ce5d7ee5e..5231f0544 100644
              "read_only": "This script cannot be edited from the UI, because it is not stored in the ''scripts.yaml'' file.",
              "unavailable": "Script is unavailable",
              "migrate": "Migrate",
-@@ -3748,7 +3750,7 @@
+@@ -3758,7 +3763,7 @@
            "activated": "Activated scene {name}.",
            "picker": {
              "header": "Scene Editor",
@@ -8738,7 +8714,7 @@ index ce5d7ee5e..5231f0544 100644
              "learn_more": "Learn more about scenes",
              "pick_scene": "Pick scene to edit",
              "no_scenes": "We couldn't find any scenes",
-@@ -3811,11 +3813,11 @@
+@@ -3821,11 +3826,11 @@
            "description_features": "Control home when away and integrate with Alexa and Google Assistant",
            "login": {
              "title": "Cloud login",
@@ -8754,7 +8730,7 @@ index ce5d7ee5e..5231f0544 100644
              "dismiss": "Dismiss",
              "sign_in": "Sign in",
              "email": "Email",
-@@ -3827,8 +3829,8 @@
+@@ -3837,8 +3842,8 @@
              "trial_info": "No payment information necessary",
              "alert_password_change_required": "You need to change your password before logging in.",
              "alert_email_confirm_necessary": "You need to confirm your email before logging in.",
@@ -8765,7 +8741,7 @@ index ce5d7ee5e..5231f0544 100644
            },
            "forgot_password": {
              "title": "Forgot password",
-@@ -3842,14 +3844,14 @@
+@@ -3852,14 +3857,14 @@
            "register": {
              "title": "Register Account",
              "headline": "Start your free trial",
@@ -8784,7 +8760,7 @@ index ce5d7ee5e..5231f0544 100644
              "information4": "By registering an account you agree to the following terms and conditions.",
              "link_terms_conditions": "Terms and conditions",
              "link_privacy_policy": "Privacy policy",
-@@ -3868,14 +3870,14 @@
+@@ -3878,14 +3883,14 @@
              "reset_data_confirm_text": "This will reset all your cloud settings. This includes your remote connection, Google Assistant and Amazon Alexa integrations. This action cannot be undone.",
              "reset": "Reset",
              "reset_data_failed": "Failed to reset cloud data",
@@ -8801,7 +8777,7 @@ index ce5d7ee5e..5231f0544 100644
              "integrations_introduction2": "Check the website for ",
              "integrations_link_all_features": " all available features",
              "tip_moved_voice_assistants": "Looking for Google Assistant and Amazon Alexa settings? They are moved to the new voice assistants page.",
-@@ -3907,7 +3909,7 @@
+@@ -3917,7 +3922,7 @@
                "cerificate_loading": "Your certificate is loading.",
                "cerificate_loaded": "Your certificate is loaded, waiting for validation.",
                "cerificate_error": "There was an error generating the certificate, check your logs.",
@@ -8809,8 +8785,14 @@ index ce5d7ee5e..5231f0544 100644
 +              "info": "MSH Cloud provides a secure remote access to your instance while away from home. For more information on remote access and these settings visit our security documentation.",
                "info_instance_will_be_available": "Your instance will be available at your Nabu Casa URL.",
                "link_learn_how_it_works": "Learn how it works",
-               "show_url": "Show full URL",
-@@ -3924,11 +3926,11 @@
+               "security_options": "Security options",
+@@ -3931,16 +3936,16 @@
+             },
+             "ice_servers": {
+               "title": "WebRTC connections",
+-              "info": "Home Assistant Cloud provides WebRTC servers. This improves your ability to view your camera streams when you are away from home.",
++              "info": "MSH Cloud provides WebRTC servers. This improves your ability to view your camera streams when you are away from home.",
+               "link_learn_how_it_works": "Learn how it works"
              },
              "alexa": {
                "title": "Alexa",
@@ -8825,7 +8807,7 @@ index ce5d7ee5e..5231f0544 100644
                "state_reporting_error": "Unable to {enable_disable} report state.",
                "show_entities": "[%key:ui::panel::config::cloud::account::google::show_entities%]",
                "exposed_entities": "[%key:ui::panel::config::cloud::account::google::exposed_entities%]",
-@@ -3936,20 +3938,20 @@
+@@ -3948,20 +3953,20 @@
                "enable": "enable",
                "disable": "disable",
                "not_configured_title": "Continue setting up Alexa",
@@ -8851,7 +8833,7 @@ index ce5d7ee5e..5231f0544 100644
                "security_devices": "Security devices",
                "enter_pin_info": "Please enter a PIN to interact with security devices. Security devices are doors, garage doors, and locks. You will be asked to say/enter this PIN when interacting with security devices via Google Assistant.",
                "devices_pin": "Security Devices PIN",
-@@ -3959,14 +3961,14 @@
+@@ -3971,14 +3976,14 @@
                "manual_config": "Editing which entities are exposed via the UI is disabled because you have configured entity filters in configuration.yaml.",
                "enter_pin_error": "Unable to store PIN:",
                "not_configured_title": "Continue setting up Google Assistant",
@@ -8868,7 +8850,7 @@ index ce5d7ee5e..5231f0544 100644
                "no_hooks_yet": "Looks like you have no webhooks yet. Get started by configuring a ",
                "no_hooks_yet_link_integration": "webhook-based integration",
                "no_hooks_yet2": " or by creating a ",
-@@ -4016,7 +4018,7 @@
+@@ -4028,7 +4033,7 @@
              "integration": "Integration",
              "config_entry": "Config entry"
            },
@@ -8877,7 +8859,7 @@ index ce5d7ee5e..5231f0544 100644
            "open_configuration_url": "Visit",
            "download_diagnostics": "Download diagnostics",
            "download_diagnostics_integration": "Download {integration} diagnostics",
-@@ -4144,8 +4146,8 @@
+@@ -4156,8 +4161,8 @@
            "description": "Manage known entities",
            "picker": {
              "header": "Entities",
@@ -8888,7 +8870,7 @@ index ce5d7ee5e..5231f0544 100644
              "search": "Search {number} entities",
              "unnamed_entity": "Unnamed entity",
              "status": {
-@@ -4175,18 +4177,18 @@
+@@ -4187,18 +4192,18 @@
              "enable_selected": {
                "button": "Enable selected",
                "confirm_title": "Do you want to enable {number} {number, plural,\n  one {entity}\n  other {entities}\n}?",
@@ -8910,7 +8892,7 @@ index ce5d7ee5e..5231f0544 100644
              },
              "hide_selected": {
                "button": "Hide selected",
-@@ -4200,8 +4202,8 @@
+@@ -4212,8 +4217,8 @@
          },
          "person": {
            "caption": "People",
@@ -8921,7 +8903,7 @@ index ce5d7ee5e..5231f0544 100644
            "note_about_persons_configured_in_yaml": "People configured via configuration.yaml cannot be edited via the UI.",
            "learn_more": "Learn more about people",
            "no_persons_created_yet": "Looks like you have not added any people yet.",
-@@ -4216,7 +4218,7 @@
+@@ -4228,7 +4233,7 @@
              "name": "Name",
              "name_error_msg": "Name is required",
              "linked_user": "Linked User",
@@ -8930,7 +8912,7 @@ index ce5d7ee5e..5231f0544 100644
              "no_device_tracker_available_intro": "When you have devices that indicate the presence of a person, you will be able to assign them to a person here. You can add your first device by adding a presence-detection integration from the integrations page.",
              "link_presence_detection_integrations": "Presence Detection Integrations",
              "link_integrations_page": "Integrations page",
-@@ -4267,7 +4269,7 @@
+@@ -4279,7 +4284,7 @@
              "create": "Add",
              "update": "Update"
            },
@@ -8939,7 +8921,7 @@ index ce5d7ee5e..5231f0544 100644
          },
          "integrations": {
            "caption": "Integrations",
-@@ -4287,7 +4289,7 @@
+@@ -4299,7 +4304,7 @@
            "no_ignored_integrations": "No ignored integrations",
            "note_about_integrations": "No integrations matched your search, the integration you want to set up might not be available to set up via the UI yet.",
            "note_about_website_reference": "More are available on the ",
@@ -8948,7 +8930,7 @@ index ce5d7ee5e..5231f0544 100644
            "configure": "Configure",
            "reconfigure": "Reconfigure",
            "none": "Nothing configured yet",
-@@ -4368,11 +4370,11 @@
+@@ -4380,11 +4385,11 @@
              "enable_debug_logging": "Enable debug logging",
              "reconfigure": "Reconfigure",
              "reload": "Reload",
@@ -8964,7 +8946,7 @@ index ce5d7ee5e..5231f0544 100644
              "disable_confirm_title": "Disable {title}?",
              "disable_confirm_text": "Its devices and entities will be disabled.",
              "disable_error": "Enabling or disabling of the integration failed",
-@@ -4399,9 +4401,8 @@
+@@ -4411,9 +4416,8 @@
                }
              },
              "custom_integration": "Custom integration",
@@ -8976,7 +8958,7 @@ index ce5d7ee5e..5231f0544 100644
              "no_config_flow": "This integration was not set up from the UI",
              "disabled_polling": "Automatic polling for updated data disabled",
              "debug_logging_enabled": "Debug logging enabled",
-@@ -4426,10 +4427,10 @@
+@@ -4438,10 +4442,10 @@
              "next": "Next",
              "preview": "Preview",
              "found_following_devices": "We found the following devices",
@@ -8990,7 +8972,7 @@ index ce5d7ee5e..5231f0544 100644
              "not_all_required_fields": "Not all required fields are filled in.",
              "error_saving_area": "Error saving area: {error}",
              "created_config": "Created configuration for {name}.",
-@@ -4444,7 +4445,7 @@
+@@ -4456,7 +4460,7 @@
              },
              "error": "Error",
              "could_not_load": "Config flow could not be loaded",
@@ -8999,7 +8981,7 @@ index ce5d7ee5e..5231f0544 100644
              "supported_brand_flow": "Support for {supported_brand} devices is provided by {flow_domain_name}. Do you want to continue?",
              "missing_zwave_zigbee_title": "{integration} is not setup",
              "missing_zwave_zigbee": "To add a {brand} device, you first need {supported_hardware_link} and the {integration} integration set up. If you already have the hardware then you can proceed with the setup of {integration}.",
-@@ -4457,7 +4458,7 @@
+@@ -4469,7 +4473,7 @@
          },
          "users": {
            "caption": "Users",
@@ -9008,7 +8990,7 @@ index ce5d7ee5e..5231f0544 100644
            "users_privileges_note": "The user group feature is a work in progress. The user will be unable to administer the instance via the UI. We're still auditing all management API endpoints to ensure that they correctly limit access to administrators.",
            "is_not_active": "Disabled",
            "is_system": "System user",
-@@ -4530,7 +4531,7 @@
+@@ -4542,7 +4546,7 @@
            "description": "Manage the OAuth application credentials used by Integrations",
            "editor": {
              "caption": "Add credentials",
@@ -9017,7 +8999,7 @@ index ce5d7ee5e..5231f0544 100644
              "missing_credentials": "Setting up {integration} requires configuring application credentials.",
              "missing_credentials_domain_link": "View {integration} documentation",
              "view_documentation": "View application credentials documentation",
-@@ -4599,16 +4600,16 @@
+@@ -4611,16 +4615,16 @@
            "add_dataset_label": "Operational dataset TLV",
            "add_dataset_button": "Add dataset",
            "confirm_reset_border_router": "Reset border router?",
@@ -9038,7 +9020,7 @@ index ce5d7ee5e..5231f0544 100644
            "operational_dataset": "Operational dataset",
            "change_channel": "Change channel",
            "change_channel_initiated_title": "Channel change in progress",
-@@ -4618,7 +4619,7 @@
+@@ -4630,7 +4634,7 @@
            "change_channel_multiprotocol_enabled_title": "The Thread radio has multiprotocol enabled",
            "change_channel_multiprotocol_enabled_text": "To change channel when the Thread radio has multiprotocol enabled, please use the hardware settings menu.",
            "change_channel_range": "Channel must be in the range 11 to 26",
@@ -9047,7 +9029,7 @@ index ce5d7ee5e..5231f0544 100644
            "thread_network_info": "Thread network information",
            "thread_network_delete_credentials": "Delete Thread network credentials"
          },
-@@ -4645,7 +4646,7 @@
+@@ -4657,7 +4661,7 @@
              "pairing_mode": "Make sure your devices are in pairing mode. Check the instructions of your device or {documentation_link} on how to do this.",
              "pairing_mode_link": "the documentation",
              "discovered_text": "Devices will show up here once discovered.",
@@ -9056,7 +9038,7 @@ index ce5d7ee5e..5231f0544 100644
              "search_again": "Search again"
            },
            "add_device": "Add device",
-@@ -4833,7 +4834,7 @@
+@@ -4845,7 +4849,7 @@
            "hard_reset_controller": {
              "NotStarted": {
                "title": "Reset controller to factory settings",
@@ -9065,7 +9047,7 @@ index ce5d7ee5e..5231f0544 100644
              },
              "InProgress": {
                "title": "Resetting controller",
-@@ -4962,21 +4963,7 @@
+@@ -4974,21 +4978,7 @@
              "view_device": "View Device",
              "interview_started": "The device is being interviewed. This may take some time.",
              "interview_failed": "The device interview failed. Additional information may be available in the logs.",
@@ -9088,7 +9070,7 @@ index ce5d7ee5e..5231f0544 100644
            },
            "provisioned": {
              "dsk": "DSK",
-@@ -4985,7 +4972,7 @@
+@@ -4997,7 +4987,7 @@
              "included": "Included",
              "not_included": "Not Included",
              "confirm_unprovision_title": "Are you sure you want to unprovision the device?",
@@ -9097,7 +9079,7 @@ index ce5d7ee5e..5231f0544 100644
            },
            "security_classes": {
              "None": {
-@@ -5010,7 +4997,7 @@
+@@ -5022,7 +5012,7 @@
            },
            "remove_node": {
              "title": "Remove a Z-Wave device",
@@ -9106,7 +9088,7 @@ index ce5d7ee5e..5231f0544 100644
              "start_exclusion": "Start exclusion",
              "cancel_exclusion": "Cancel exclusion",
              "controller_in_exclusion_mode": "Your Z-Wave controller is now in exclusion mode.",
-@@ -5061,8 +5048,8 @@
+@@ -5073,8 +5063,8 @@
            },
            "update_firmware": {
              "title": "Update device firmware",
@@ -9117,7 +9099,7 @@ index ce5d7ee5e..5231f0544 100644
              "introduction": "Select the firmware file you would like to use to update {device}.",
              "introduction_controller": "Select the firmware file you would like to use to update {device}. Note that once you start a firmware update, you MUST wait for the update to complete.",
              "firmware_target_intro": "Select the firmware target (0 for the Z-Wave chip, ≥1 for other chips if they exist) for this update.",
-@@ -5119,7 +5106,7 @@
+@@ -5131,7 +5121,7 @@
              "unknown": "Unknown"
            },
            "node_type": {
@@ -9126,7 +9108,7 @@ index ce5d7ee5e..5231f0544 100644
              "sleepy_end_device": "Sleepy end device",
              "routing_end_device": "Routing end device",
              "bridge": "Bridge",
-@@ -5172,7 +5159,7 @@
+@@ -5184,7 +5174,7 @@
            },
            "open_commissioning_window": {
              "title": "Share device",
@@ -9135,7 +9117,7 @@ index ce5d7ee5e..5231f0544 100644
              "prevent_misuse_description": "Note: Do not press the physical setup button on the device as this will reset it.",
              "start_commissioning": "Share device",
              "in_progress": "We're communicating with the device. This may take some time.",
-@@ -5190,11 +5177,11 @@
+@@ -5202,11 +5192,11 @@
            "join_chat": "Chat",
            "join_blog": "Blog",
            "join_newsletter": "Newsletter",
@@ -9149,7 +9131,7 @@ index ce5d7ee5e..5231f0544 100644
            "preferences": {
              "base": {
                "title": "Basic analytics",
-@@ -5202,7 +5189,7 @@
+@@ -5214,7 +5204,7 @@
              },
              "usage": {
                "title": "Usage",
@@ -9158,7 +9140,7 @@ index ce5d7ee5e..5231f0544 100644
              },
              "statistics": {
                "title": "Statistical data",
-@@ -5215,7 +5202,7 @@
+@@ -5227,7 +5217,7 @@
            },
            "need_base_enabled": "You need to enable basic analytics for this option to be available",
            "learn_more": "How we process your data",
@@ -9167,7 +9149,7 @@ index ce5d7ee5e..5231f0544 100644
          },
          "network": {
            "caption": "Network",
-@@ -5225,8 +5212,7 @@
+@@ -5237,8 +5227,7 @@
            "supervisor": {
              "title": "Configure network interfaces",
              "connected_to": "Connected to {ssid}",
@@ -9177,7 +9159,7 @@ index ce5d7ee5e..5231f0544 100644
              "signal_strength": "Signal strength",
              "open": "Open",
              "wep": "WEP",
-@@ -5237,13 +5223,9 @@
+@@ -5249,13 +5238,9 @@
              "static": "Static",
              "auto": "Automatic",
              "disabled": "Disabled",
@@ -9193,7 +9175,7 @@ index ce5d7ee5e..5231f0544 100644
              "unsaved": "You have unsaved changes, these will get lost if you change tabs, do you want to continue?",
              "failed_to_change": "Failed to change network settings",
              "hostname": {
-@@ -5264,7 +5246,7 @@
+@@ -5276,7 +5261,7 @@
            "disk_metrics": "Disk metrics",
            "datadisk": {
              "title": "Move data disk",
@@ -9202,7 +9184,7 @@ index ce5d7ee5e..5231f0544 100644
              "extra_information": "Size: {size}, S/N: {serial}",
              "select_device": "Select new data disk",
              "no_devices_title": "No suitable storage found",
-@@ -5285,7 +5267,7 @@
+@@ -5297,7 +5282,7 @@
              "not_supported": {
                "title": "The operating system does not support network storage",
                "supervised": "Network storage is not supported on this host",
@@ -9211,7 +9193,7 @@ index ce5d7ee5e..5231f0544 100644
                "navigate_to_updates": "Go to updates"
              },
              "mount_usage": {
-@@ -5364,7 +5346,7 @@
+@@ -5376,7 +5361,7 @@
            "integration_start_time": "Integration startup time"
          },
          "system_dashboard": {
@@ -9220,7 +9202,7 @@ index ce5d7ee5e..5231f0544 100644
          }
        },
        "lovelace": {
-@@ -5416,14 +5398,14 @@
+@@ -5428,14 +5413,14 @@
              "more_info": "Show more info: {name}"
            },
            "iframe": {
@@ -9238,26 +9220,7 @@ index ce5d7ee5e..5231f0544 100644
            },
            "map": {
              "reset_focus": "Reset focus"
-@@ -5608,14 +5590,14 @@
-             "type_warning_sections": "You can not change your view to use the 'sections' view type because migration is not supported yet. Start from scratch with a new view if you want to experiment with the 'sections' view.",
-             "type_warning_others": "You can not change your view to an other type because migration is not supported yet. Start from scratch with a new view if you want to use another view type.",
-             "types": {
--              "masonry": "Masonry",
-+              "masonry": "Masonry (default)",
-               "sidebar": "Sidebar",
--              "panel": "Panel (single card)",
--              "sections": "Sections"
-+              "panel": "Panel (1 card)",
-+              "sections": "Sections (experimental)"
-             },
-             "subview": "Subview",
-             "max_columns": "Max number of sections wide",
--            "section_specifics": "Sections view specific settings",
-+            "section_specifics": "Sections view specifics settings",
-             "dense_section_placement": "Dense section placement",
-             "dense_section_placement_helper": "Will try to fill gaps with sections that fit the gap. This may make section placement less predictable.",
-             "subview_helper": "Subviews don't appear in tabs and have a back button.",
-@@ -5744,7 +5726,7 @@
+@@ -5766,7 +5751,7 @@
            },
            "save_config": {
              "header": "Take control of your dashboard",
@@ -9266,7 +9229,7 @@ index ce5d7ee5e..5231f0544 100644
              "para_sure": "Are you sure you want to take control of your user interface?",
              "yaml_mode": "You are using YAML mode for this dashboard, which means you cannot change your dashboard config from the UI. If you want to manage this dashboard from the UI, remove 'mode: yaml' from your dashboard configuration in 'configuration.yaml.'.",
              "yaml_control": "To take control in YAML mode, create a YAML file with the name you specified in your config for this dashboard, or the default 'ui-lovelace.yaml'.",
-@@ -5756,7 +5738,7 @@
+@@ -5778,7 +5763,7 @@
            "migrate": {
              "header": "Configuration incompatible",
              "para_no_id": "This element doesn't have an ID. Please add an ID to this element in 'ui-lovelace.yaml'.",
@@ -9275,7 +9238,7 @@ index ce5d7ee5e..5231f0544 100644
              "migrate": "Migrate configuration"
            },
            "action-editor": {
-@@ -6003,7 +5985,7 @@
+@@ -6025,7 +6010,7 @@
              },
              "iframe": {
                "name": "Webpage",
@@ -9284,7 +9247,7 @@ index ce5d7ee5e..5231f0544 100644
              },
              "light": {
                "name": "Light",
-@@ -6108,7 +6090,7 @@
+@@ -6131,7 +6116,7 @@
              },
              "picture-elements": {
                "name": "Picture elements",
@@ -9293,7 +9256,7 @@ index ce5d7ee5e..5231f0544 100644
                "card_options": "Card Options",
                "elements": "Elements",
                "new_element": "Add new element",
-@@ -6133,7 +6115,7 @@
+@@ -6156,7 +6141,7 @@
              },
              "picture-glance": {
                "name": "Picture glance",
@@ -9302,7 +9265,7 @@ index ce5d7ee5e..5231f0544 100644
                "state_entity": "State entity"
              },
              "plant-status": {
-@@ -6149,8 +6131,7 @@
+@@ -6172,8 +6157,7 @@
              "todo-list": {
                "name": "To-do list",
                "description": "The to-do list card allows you to add, edit, check-off, and clear items from your to-do list.",
@@ -9312,7 +9275,7 @@ index ce5d7ee5e..5231f0544 100644
              },
              "thermostat": {
                "name": "Thermostat",
-@@ -6461,7 +6442,7 @@
+@@ -6484,7 +6468,7 @@
            "entity_not_found": "Entity not available: {entity}",
            "entity_non_numeric": "Entity is non-numeric: {entity}",
            "entity_unavailable": "Entity is currently unavailable: {entity}",
@@ -9321,7 +9284,7 @@ index ce5d7ee5e..5231f0544 100644
          },
          "changed_toast": {
            "message": "Your dashboard was updated. Refresh to see changes?"
-@@ -6681,7 +6662,7 @@
+@@ -6704,7 +6688,7 @@
          },
          "long_lived_access_tokens": {
            "header": "Long-lived access tokens",
@@ -9330,7 +9293,7 @@ index ce5d7ee5e..5231f0544 100644
            "learn_auth_requests": "Learn how to make authenticated requests.",
            "created": "Created {date}",
            "confirm_delete_title": "Delete long-lived access token?",
-@@ -6705,18 +6686,18 @@
+@@ -6728,18 +6712,18 @@
          "information": "Information",
          "delete_confirm_title": "Remove {name}?",
          "delete_confirm_text": "Are you sure you want to remove this list and all of its items?",
@@ -9354,7 +9317,7 @@ index ce5d7ee5e..5231f0544 100644
          "just_checking": "Just checking",
          "who_is_logging_in": "Who is logging in?",
          "other_options": "Other login options",
-@@ -6823,8 +6804,8 @@
+@@ -6846,8 +6830,8 @@
            "demo": {
              "demo_by": "by {name}",
              "next_demo": "Next demo",
@@ -9365,7 +9328,7 @@ index ce5d7ee5e..5231f0544 100644
            }
          },
          "config": {
-@@ -6861,7 +6842,7 @@
+@@ -6884,7 +6868,7 @@
              }
            },
            "sections": {
@@ -9374,7 +9337,7 @@ index ce5d7ee5e..5231f0544 100644
              "description_blog_post": "blog post",
              "titles": {
                "welcome": "Welcome",
-@@ -6887,7 +6868,7 @@
+@@ -6910,7 +6894,7 @@
          "tabs": {
            "assist": {
              "title": "Sentences parser",
@@ -9383,7 +9346,7 @@ index ce5d7ee5e..5231f0544 100644
              "parse_sentences": "Parse sentences",
              "sentences": "Sentences",
              "download_results": "Download results",
-@@ -6923,7 +6904,7 @@
+@@ -6946,7 +6930,7 @@
            },
            "actions": {
              "title": "Actions",
@@ -9392,7 +9355,7 @@ index ce5d7ee5e..5231f0544 100644
              "call_service": "Perform action",
              "response": "Response",
              "column_parameter": "Parameter",
-@@ -6955,7 +6936,7 @@
+@@ -6978,7 +6962,7 @@
            },
            "states": {
              "title": "States",
@@ -9401,7 +9364,7 @@ index ce5d7ee5e..5231f0544 100644
              "description2": "If the entity belongs to a device, there will be no actual communication with that device.",
              "entity": "Entity",
              "state": "State",
-@@ -6975,7 +6956,7 @@
+@@ -6998,7 +6982,7 @@
            },
            "templates": {
              "title": "Template",
@@ -9410,7 +9373,7 @@ index ce5d7ee5e..5231f0544 100644
              "editor": "Template editor",
              "result": "Result",
              "reset": "Reset to demo template",
-@@ -6983,7 +6964,7 @@
+@@ -7006,7 +6990,7 @@
              "confirm_clear": "Do you want to clear your current template?",
              "result_type": "Result type",
              "jinja_documentation": "Jinja2 template documentation",
@@ -9419,7 +9382,7 @@ index ce5d7ee5e..5231f0544 100644
              "unknown_error_template": "Unknown error rendering template",
              "time": "This template updates at the start of each minute.",
              "all_listeners": "This template listens for all state changed events.",
-@@ -7088,9 +7069,9 @@
+@@ -7111,9 +7095,9 @@
              "section": {
                "validation": {
                  "heading": "Check and restart",
@@ -9431,7 +9394,7 @@ index ce5d7ee5e..5231f0544 100644
                  "invalid": "Configuration invalid!",
                  "warnings": "Configuration warnings",
                  "errors": "Configuration errors"
-@@ -7098,7 +7079,7 @@
+@@ -7121,7 +7105,7 @@
                "reloading": {
                  "all": "All YAML configuration",
                  "heading": "YAML configuration reloading",
@@ -9440,7 +9403,7 @@ index ce5d7ee5e..5231f0544 100644
                  "reload": "{domain}",
                  "core": "Location & customizations",
                  "group": "Groups, group entities, and notify services",
-@@ -7135,11 +7116,11 @@
+@@ -7158,11 +7142,11 @@
                  "themes": "Themes"
                },
                "server_management": {
@@ -9455,7 +9418,7 @@ index ce5d7ee5e..5231f0544 100644
                }
              }
            }
-@@ -7158,7 +7139,7 @@
+@@ -7181,7 +7165,7 @@
            "vision": "Read our vision",
            "community": "Join our community",
            "download_app": "Download our app",
@@ -9464,7 +9427,7 @@ index ce5d7ee5e..5231f0544 100644
            "open_home_newsletter": "Building the Open Home newsletter",
            "discord": "Discord chat",
            "x": "[%key:ui::panel::config::tips::join_x%]",
-@@ -7191,7 +7172,7 @@
+@@ -7214,7 +7198,7 @@
            "title_location_detect": "Do you want us to detect your location?",
            "intro_location_detect": "We can detect your location by making a one-time request to an external service.",
            "country_intro": "We would like to know the country your home is in, so we can use the correct units for you.",
@@ -9473,7 +9436,7 @@ index ce5d7ee5e..5231f0544 100644
            "location_name_default": "Home",
            "address_label": "Search address",
            "button_detect": "Detect",
-@@ -7258,7 +7239,7 @@
+@@ -7281,7 +7265,7 @@
        "custom": {
          "external_panel": {
            "question_trust": "Do you trust the external panel {name} at {link}?",
@@ -9482,7 +9445,7 @@ index ce5d7ee5e..5231f0544 100644
            "hide_message": "Check docs for the panel_custom component to hide this message"
          }
        },
-@@ -7306,7 +7287,7 @@
+@@ -7329,7 +7313,7 @@
      "tips": {
        "key_c_hint": "Press 'c' on any page to open the command dialog",
        "key_e_hint": "Press 'e' on any page to open the entity search dialog",
@@ -9491,7 +9454,7 @@ index ce5d7ee5e..5231f0544 100644
      }
    },
    "supervisor": {
-@@ -7354,7 +7335,7 @@
+@@ -7377,7 +7361,7 @@
          "hostname": "Hostname",
          "new_update_available": "{name} {version} is available",
          "not_available_arch": "This add-on is not compatible with the processor of your device or the operating system you have installed on your device.",
@@ -9500,7 +9463,7 @@ index ce5d7ee5e..5231f0544 100644
          "visit_addon_page": "Visit the {name} page for more details.",
          "restart": "restart",
          "start": "start",
-@@ -7375,15 +7356,15 @@
+@@ -7398,15 +7382,15 @@
            },
            "rating": {
              "title": "Add-on security rating",
@@ -9519,7 +9482,7 @@ index ce5d7ee5e..5231f0544 100644
            },
            "full_access": {
              "title": "Full hardware access",
-@@ -7391,27 +7372,27 @@
+@@ -7414,27 +7398,27 @@
            },
            "hassio_api": {
              "title": "Supervisor API access",
@@ -9553,7 +9516,7 @@ index ce5d7ee5e..5231f0544 100644
            },
            "signed": {
              "title": "Signed",
-@@ -7597,16 +7578,16 @@
+@@ -7620,16 +7604,16 @@
          "update_supervisor": "Update the Supervisor",
          "channel": "Channel",
          "leave_beta_action": "Leave beta channel",
@@ -9574,7 +9537,7 @@ index ce5d7ee5e..5231f0544 100644
          "unsupported_reason": {
            "apparmor": "AppArmor is not enabled on the host",
            "content_trust": "Content-trust validation is disabled",
-@@ -7709,7 +7690,7 @@
+@@ -7733,7 +7717,7 @@
        "download": "Download",
        "more_actions": "More actions",
        "remote_download_title": "Potentially slow download",
@@ -9583,7 +9546,7 @@ index ce5d7ee5e..5231f0544 100644
      },
      "dialog": {
        "network": {
-@@ -7727,7 +7708,6 @@
+@@ -7751,7 +7735,6 @@
          "auto": "Automatic",
          "disabled": "Disabled",
          "ip_netmask": "IP address/netmask",
@@ -9591,7 +9554,7 @@ index ce5d7ee5e..5231f0544 100644
          "gateway": "Gateway address",
          "dns_servers": "DNS servers",
          "unsaved": "You have unsaved changes, these will get lost if you change tabs, do you want to continue?",
-@@ -7759,7 +7739,7 @@
+@@ -7783,7 +7766,7 @@
        },
        "uninstall_addon": {
          "title": "Uninstall {name}?",
@@ -9600,7 +9563,7 @@ index ce5d7ee5e..5231f0544 100644
          "uninstall": "Uninstall"
        },
        "hardware": {
-@@ -7781,7 +7761,7 @@
+@@ -7805,7 +7788,7 @@
        },
        "datadisk_move": {
          "title": "[%key:supervisor::system::host::move_datadisk%]",
