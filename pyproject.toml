@@ -3,7 +3,7 @@ requires = ["setuptools~=75.1"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name         = "home-assistant-frontend"
+name         = "my-smart-homes-frontend"
 version      = "20241030.0"
 license      = {text = "Apache-2.0"}
 description  = "The Home Assistant frontend"
